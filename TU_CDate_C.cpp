@@ -1,6 +1,6 @@
 //********************************************************
 // Auteur : MP Pinaud
-// date : 19/03/2021
+// date : 25/04/2021
 // fichier: TU_CDate.cpp
 // Programme de test unitaire de la classe CDate
 // Difficulté C
