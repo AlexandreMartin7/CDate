@@ -10,7 +10,6 @@ using namespace std;
 #include "include/CDate.h"
 
 
-
 void test_constructeur();
 void test_egal();
 void test_constructeurSansParametre();
@@ -19,6 +18,7 @@ void test_inf();
 void test_incrementerSec();
 void saisirDate(int &j, int &m, int &a, int &s, int &mn, int &h);
 void afficherDate(CDate &d);
+int jourDansLeMois(int a, int m );
 
 int main ()
 {
@@ -28,7 +28,6 @@ int main ()
 	{
 		cout << "Test de la classe CDate" << endl;
 		cout << "**************************" << endl<< endl;
-
 		cout << "Quelle methode voulez-vous tester ?" << endl;
 		cout << "1 - Constructeur " << endl;
 		cout << "2 - operateur ==" << endl;
@@ -104,8 +103,8 @@ void saisirDate(int &j, int &m, int &a, int &s, int &mn, int &h)
 //***************************************************************
 void afficherDate (CDate &d)
 {
-cout << d.todayJr() << "/" << d.todayMois() << "/" << d.todayAn() << endl;    // Affichage de la date sous la forme jour/mois/annee
-cout << d.todayHr() << "h" << d.todayMn() << " et " << d.todaySc() << "secs" << endl; // Affichage de l'heure
+cout << d.getDay() << "/" << d.getMonth() << "/" << d.getYear() << endl;    // Affichage de la date sous la forme jour/mois/annee
+cout << d.getHour() << "h" << d.getMinute() << " et " << d.getSec() << "secs" << endl; // Affichage de l'heure
 
 
 }
@@ -213,7 +212,6 @@ void test_sup()
     else
         cout << "La deuxième date est plus récente que la première" << endl;
 }
-// NE FONCTIONNE PAS
 
 //**************************************************************
 // Fonction:test_inf
@@ -245,7 +243,6 @@ void test_inf()
     else
         cout << "La première date est plus récente que la deuxième" << endl;
 }
-// NE FONCTIONNE PAS
 
 
 //**************************************************************
@@ -259,10 +256,37 @@ void test_incrementerSec()
 	cout << "--------------------------------------------" << endl;
 
 
+    saisirDate(j,m,a,s,mn,h);
+	// Création de la date
+	CDate today(j,m,a,s,mn,h);
 
+	cout << "Combien de secondes voulez-vous ajouter ? :";
+	int nbSec;
+	cin >>nbSec;
 
+	for(int i = 0; i<nbSec; i++)
+        today.incrementerSec();
 
+	afficherDate(today);
+}
 
+//**************************************************************
+// Fonction:anneeBissextile
+// Rôle :	verifie si une année est bissextile
+// Paramètre d'entrée : l'année à tester
+// Valeur de retour : true si l'année est bissextile, false sinon
+//***************************************************************
+bool anneeBisextile(int a){
+    bool bissextile = false;
+    if((a%4==0 && a%100!=0) || a%400==0)
+    {
+        bissextile = true;
+    }
 
+    return bissextile;
 
 }
+
+
+
+
